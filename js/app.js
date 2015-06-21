@@ -5,6 +5,8 @@ var GRIDHEIGHT = 85;
 var GRIDWIDTH = 100;
 var HEIGHT = 400;
 var WIDTH = 500;
+var ENEMYHEIGHT = 60;
+var ENEMYWIDTH = 100;
 
 var Enemy = function() {
     // Variables applied to each of our instances go here,
@@ -12,19 +14,20 @@ var Enemy = function() {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-    this.x = 10;
-    this.y = 50;
-    this.speed = 20;
+    this.x = -ENEMYWIDTH;
+    this.y = Math.round(Math.random() * 2 + 1) * GRIDHEIGHT - ENEMYHEIGHT / 2;
+    console.log(this.y);
+    this.speed = 100;
 }
 
 Enemy.prototype.update = function(dt) {
     // Update the enemy's position, required method for game
     // Parameter: dt, a time delta between ticks
-    if (this.x < ctx.width) {
+    if (this.x < WIDTH) {
         this.x = this.x + this.speed * dt;
     }
     else {
-        this.x = 0;
+        this.x = -ENEMYWIDTH;
     }
 }
 
@@ -38,8 +41,8 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 var Player = function() {
     this.sprite = 'images/char-boy.png';
-    this.x = 10;
-    this.y = 400;
+    this.x = 0;
+    this.y = HEIGHT;
 };
 
 Player.prototype.update = function() {
