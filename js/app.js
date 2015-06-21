@@ -10,10 +10,7 @@ var ENEMYWIDTH = 100;
 var PLAYERWIDTH = 60;
 
 var Enemy = function() {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
+    // This is the enemy object
     this.sprite = 'images/enemy-bug.png';
     var randomPick = Math.round(Math.random() * 2 + 1);
     if (randomPick === 1 || randomPick === 3) {
@@ -26,12 +23,11 @@ var Enemy = function() {
     this.y = randomPick * GRIDHEIGHT - ENEMYHEIGHT / 2;
     this.speed = (100 * Math.random() + 150) * this.direction;
     console.log(this.x, this.y, this.speed);
-
 }
 
 Enemy.prototype.update = function(dt) {
     // Update the enemy's position, required method for game
-    // Parameter: dt, a time delta between ticks
+    // Make sure the enemy loop through the table
     if (this.x > WIDTH && this.direction === 1) {
         this.x = -ENEMYWIDTH;
     } else if (this.x < -ENEMYWIDTH && this.direction === -1) {
@@ -41,21 +37,21 @@ Enemy.prototype.update = function(dt) {
     }
 }
 
-// Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
+    // drawing function for the enemy
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
 var Player = function() {
+    // This is the player object
     this.sprite = 'images/char-boy.png';
     this.x = 0;
     this.y = HEIGHT;
 };
 
 Player.prototype.update = function() {
+    // reposition the player when it reaches top or if it touches with any
+    // of the enemys.
     if (this.y < 0) {
         this.y = HEIGHT;
     }
@@ -69,10 +65,12 @@ Player.prototype.update = function() {
 }
 
 Player.prototype.render = function() {
+    //drawing function for the player
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
 Player.prototype.handleInput = function(input) {
+    // move player to the desired position when key pressed
     if (input === 'left' && this.x >= GRIDWIDTH) {
         this.x -= GRIDWIDTH;
     } else if (input === 'right' && this.x < WIDTH - GRIDWIDTH) {
@@ -85,10 +83,6 @@ Player.prototype.handleInput = function(input) {
 
 }
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
-
 var allEnemies = [];
 while (allEnemies.length < 10) {
     allEnemies.push(new Enemy);
@@ -96,8 +90,6 @@ while (allEnemies.length < 10) {
 
 var player = new Player;
 
-// This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',
