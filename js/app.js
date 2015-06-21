@@ -7,6 +7,7 @@ var HEIGHT = 400;
 var WIDTH = 500;
 var ENEMYHEIGHT = 60;
 var ENEMYWIDTH = 100;
+var PLAYERWIDTH = 60;
 
 var Enemy = function() {
     // Variables applied to each of our instances go here,
@@ -46,6 +47,16 @@ var Player = function() {
 };
 
 Player.prototype.update = function() {
+    if (this.y < 0) {
+        this.y = HEIGHT;
+    }
+    for (var enemy in allEnemies) {
+        if (Math.abs(allEnemies[enemy].y - this.y) < 10) {
+            if (Math.abs(allEnemies[enemy].x - this.x) < (ENEMYWIDTH + PLAYERWIDTH) / 2) {
+                this.y = HEIGHT;
+            }
+        }
+    }
 
 }
 
@@ -58,7 +69,7 @@ Player.prototype.handleInput = function(input) {
         this.x -= GRIDWIDTH;
     } else if (input === 'right' && this.x < WIDTH - GRIDWIDTH) {
         this.x += GRIDWIDTH;
-    } else if (input === 'up' && this.y > GRIDHEIGHT) {
+    } else if (input === 'up') {
         this.y -= GRIDHEIGHT;
     } else if (input === 'down' && this.y <= HEIGHT - GRIDHEIGHT) {
         this.y += GRIDHEIGHT;
