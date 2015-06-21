@@ -1,6 +1,10 @@
 frontend-nanodegree-arcade-game
 ===============================
 
-Students should use this rubric: https://www.udacity.com/course/viewer#!/c-ud015/l-3072058665/m-3072588797
+The game starts with a group of bugs that walk through the screen, and your job is to move the player to the river without touching any bug.
 
-for self-checking their submission.
+=============================================
+-=== press arrow keys to move the player ===-
+=============================================
+
+good luck and have fun!

@@ -83,13 +83,18 @@ Player.prototype.handleInput = function(input) {
 
 }
 
+// a collection of enemies
 var allEnemies = [];
+
+// adding enemy to the collection
 while (allEnemies.length < 10) {
     allEnemies.push(new Enemy);
 }
 
+// this is the player
 var player = new Player;
 
+// key listener that waits for triggering the keyHandler
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',
@@ -97,6 +102,5 @@ document.addEventListener('keyup', function(e) {
         39: 'right',
         40: 'down'
     };
-
     player.handleInput(allowedKeys[e.keyCode]);
 });
