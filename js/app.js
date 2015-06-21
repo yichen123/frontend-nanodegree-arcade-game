@@ -15,20 +15,29 @@ var Enemy = function() {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-    this.x = -ENEMYWIDTH;
-    this.y = Math.round(Math.random() * 2 + 1) * GRIDHEIGHT - ENEMYHEIGHT / 2;
-    console.log(this.y);
-    this.speed = 100;
+    var randomPick = Math.round(Math.random() * 2 + 1);
+    if (randomPick === 1 || randomPick === 3) {
+        this.x = -ENEMYWIDTH;
+        this.direction = 1;
+    } else {
+        this.x = WIDTH;
+        this.direction = -1;
+    }
+    this.y = randomPick * GRIDHEIGHT - ENEMYHEIGHT / 2;
+    this.speed = (100 * Math.random() + 150) * this.direction;
+    console.log(this.x, this.y, this.speed);
+
 }
 
 Enemy.prototype.update = function(dt) {
     // Update the enemy's position, required method for game
     // Parameter: dt, a time delta between ticks
-    if (this.x < WIDTH) {
-        this.x = this.x + this.speed * dt;
-    }
-    else {
+    if (this.x > WIDTH && this.direction === 1) {
         this.x = -ENEMYWIDTH;
+    } else if (this.x < -ENEMYWIDTH && this.direction === -1) {
+        this.x = WIDTH;
+    } else {
+        this.x = this.x + this.speed * dt;
     }
 }
 
@@ -57,7 +66,6 @@ Player.prototype.update = function() {
             }
         }
     }
-
 }
 
 Player.prototype.render = function() {
@@ -82,7 +90,7 @@ Player.prototype.handleInput = function(input) {
 // Place the player object in a variable called player
 
 var allEnemies = [];
-while (allEnemies.length < 5) {
+while (allEnemies.length < 10) {
     allEnemies.push(new Enemy);
 }
 
