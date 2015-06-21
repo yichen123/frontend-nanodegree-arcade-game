@@ -1,3 +1,5 @@
+use strict;
+
 var Enemy = function() {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
@@ -9,11 +11,15 @@ var Enemy = function() {
     this.speed = 20;
 }
 
-
 Enemy.prototype.update = function(dt) {
     // Update the enemy's position, required method for game
     // Parameter: dt, a time delta between ticks
-    this.x = this.x + this.speed * dt;
+    if (this.x < ctx.width) {
+        this.x = this.x + this.speed * dt;
+    }
+    else {
+        this.x = 0;
+    }
 }
 
 // Draw the enemy on the screen, required method for game
