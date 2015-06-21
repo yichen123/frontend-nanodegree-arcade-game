@@ -1,5 +1,11 @@
 'use strict';
 
+//constants
+var GRIDHEIGHT = 85;
+var GRIDWIDTH = 100;
+var HEIGHT = 400;
+var WIDTH = 500;
+
 var Enemy = function() {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
@@ -44,7 +50,16 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
-Player.prototype.handleInput = function() {
+Player.prototype.handleInput = function(input) {
+    if (input === 'left' && this.x >= GRIDWIDTH) {
+        this.x -= GRIDWIDTH;
+    } else if (input === 'right' && this.x < WIDTH - GRIDWIDTH) {
+        this.x += GRIDWIDTH;
+    } else if (input === 'up' && this.y > GRIDHEIGHT) {
+        this.y -= GRIDHEIGHT;
+    } else if (input === 'down' && this.y <= HEIGHT - GRIDHEIGHT) {
+        this.y += GRIDHEIGHT;
+    }
 
 }
 
