@@ -1,4 +1,4 @@
-use strict;
+'use strict';
 
 var Enemy = function() {
     // Variables applied to each of our instances go here,
