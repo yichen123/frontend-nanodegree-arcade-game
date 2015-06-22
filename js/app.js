@@ -80,26 +80,11 @@ Player.prototype.ifCollision = function(object) {
     return ifTouch;
 };
 
-function enemyGenerate() {
-    // helper function for randomly generating enemy
-    var randomPick = Math.round(Math.random() * 2 + 1);
-    if (randomPick === 1 || randomPick === 3) {
-        var x = -GRIDWIDTH;
-        var direction = 1;
-    } else {
-        var x = WIDTH;
-        var direction = -1;
-    }
-    var y = randomPick * GRIDHEIGHT - GRIDHEIGHT / 2;
-    var speed = (100 * Math.random() + 150) * direction;
-    var enemy = new Enemy(x, y, speed);
-    return enemy;
-}
 // a collection enemies
 var allEnemies = [];
 
 // this is the player
-var player = new Player(WIDTH / 2 - GRIDWIDTH / 2, HEIGHT - GRIDHEIGHT / 2);
+var player;
 
 // key listener that waits for triggering the keyHandler
 document.addEventListener('keyup', function(e) {

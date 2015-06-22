@@ -167,13 +167,27 @@ var Engine = (function(global) {
         player.render();
     }
 
+    function enemyGenerate() {
+        // helper function for randomly generating enemy
+        var randomPick = Math.round(Math.random() * 2 + 1);
+        if (randomPick === 1 || randomPick === 3) {
+            var x = -GRIDWIDTH;
+            var direction = 1;
+        } else {
+            var x = WIDTH;
+            var direction = -1;
+        }
+        var y = randomPick * GRIDHEIGHT - GRIDHEIGHT / 2;
+        var speed = (100 * Math.random() + 150) * direction;
+        var enemy = new Enemy(x, y, speed);
+        return enemy;
+    }
+
     /* This function does nothing but it could have been a good place to
      * handle game reset states - maybe a new game menu or a game over screen
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        console.log('reset');
-
         // clear enemy collection
         allEnemies = [];
 
@@ -182,7 +196,7 @@ var Engine = (function(global) {
             allEnemies.push(enemyGenerate());
         }
 
-        // reset the player
+        // reset the player's position
         player = new Player(WIDTH / 2 - GRIDWIDTH / 2, HEIGHT - GRIDHEIGHT / 2);
 
     }
