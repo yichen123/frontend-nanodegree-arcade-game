@@ -1,10 +1,11 @@
-frontend-nanodegree-arcade-game
+# frontend-nanodegree-arcade-game
 ===============================
 
-The game starts with a group of bugs that walk through the screen, and your job is to move the player to the river without touching any bug.
+A bunch of bugs are walking through the road, can you reach the river without touching any bug?
 
-=============================================
--=== press arrow keys to move the player ===-
-=============================================
+1. open index.html to get start with.
+2. using arrow keys to move player.
 
 good luck and have fun!
+
+This is one of the FWDN project works. The code tamplate is provided by Udacity, and finished by Chen YI.

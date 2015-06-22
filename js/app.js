@@ -9,8 +9,8 @@ var HEIGHT = GRIDHEIGHT * (NUMROWS - 1);
 var WIDTH = GRIDWIDTH * NUMCOLS;
 
 var Entity = function(x, y) {
-    // This is the entity object that the
-    // father class for both enemy and player
+    // This is the Entity class that the
+    // father of both enemy and player classes
     this.x = x;
     this.y = y;
 };
@@ -20,7 +20,7 @@ Entity.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// This is the enemy object
+// This is the Enemy class
 var Enemy = function(x, y, speed) {
     Entity.call(this, x, y);
     this.sprite = 'images/enemy-bug.png';
@@ -40,17 +40,15 @@ Enemy.prototype.update = function(dt) {
     }
 };
 
+// This is the player class
 var Player = function(x, y) {
-    // This is the player object
     Entity.call(this, x, y);
     this.sprite = 'images/char-boy.png';
 };
-
 Player.prototype = Object.create(Entity.prototype);
 
 Player.prototype.update = function() {
-    // reposition the player when it reaches top or if it touches with any
-    // of the enemys.
+    // reposition the player when it reaches top or touches enemies.
     if (this.y < 0) {
         this.y = HEIGHT - GRIDHEIGHT / 2;
     }
@@ -75,7 +73,7 @@ Player.prototype.handleInput = function(input) {
 };
 
 Player.prototype.ifCollision = function(object) {
-    // detect if player touches the ojbect
+    // detect if player touched the ojbect
     var ifTouch = false;
     if (this.y === object.y && Math.abs(object.x - this.x) < GRIDWIDTH / 2) {
         ifTouch = true;
@@ -86,8 +84,8 @@ Player.prototype.ifCollision = function(object) {
 // a collection of enemies
 var allEnemies = [];
 
-// generate enemies randomly and add them into the collection
-while (allEnemies.length < 10) {
+// generate eight enemies randomly and add them into the collection
+while (allEnemies.length < 8) {
     var randomPick = Math.round(Math.random() * 2 + 1);
     if (randomPick === 1 || randomPick === 3) {
         var x = -GRIDWIDTH;
