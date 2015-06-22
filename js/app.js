@@ -7,6 +7,8 @@ var NUMROWS = 6;
 var NUMCOLS = 5;
 var HEIGHT = GRIDHEIGHT * (NUMROWS - 1);
 var WIDTH = GRIDWIDTH * NUMCOLS;
+var ENEMYWIDTH = 80;
+var PLAYERWIDTH = 80;
 
 var Entity = function(x, y) {
     // This is the Entity class that the
@@ -25,6 +27,7 @@ var Enemy = function(x, y, speed) {
     Entity.call(this, x, y);
     this.sprite = 'images/enemy-bug.png';
     this.speed = speed;
+    this.width = ENEMYWIDTH;
 };
 Enemy.prototype = Object.create(Entity.prototype);
 
@@ -44,6 +47,7 @@ Enemy.prototype.update = function(dt) {
 var Player = function(x, y) {
     Entity.call(this, x, y);
     this.sprite = 'images/char-boy.png';
+    this.width = PLAYERWIDTH;
 };
 Player.prototype = Object.create(Entity.prototype);
 
@@ -75,7 +79,7 @@ Player.prototype.handleInput = function(input) {
 Player.prototype.ifCollision = function(object) {
     // detect if player touched the ojbect
     var ifTouch = false;
-    if (this.y === object.y && Math.abs(object.x - this.x) < GRIDWIDTH / 2) {
+    if (this.y === object.y && this.x + this.width > object.x && this.x < object.x + object.width) {
         ifTouch = true;
     }
     return ifTouch;
