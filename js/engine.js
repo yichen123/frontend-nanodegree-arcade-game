@@ -81,7 +81,18 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
+        checkCollisions();
+    }
+
+    /*
+    * if player touches enemy, the game reset
+    */
+    function checkCollisions() {
+        for (var enemy in allEnemies) {
+            if (player.ifCollision(allEnemies[enemy]) === true) {
+                reset();
+            }
+        }
     }
 
     /* This is called by the update function  and loops through all of the
@@ -161,7 +172,19 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        // noop
+        console.log('reset');
+
+        // clear enemy collection
+        allEnemies = [];
+
+        // generate eight enemies randomly and add them into the collection
+        while (allEnemies.length < 8) {
+            allEnemies.push(enemyGenerate());
+        }
+
+        // reset the player
+        player = new Player(WIDTH / 2 - GRIDWIDTH / 2, HEIGHT - GRIDHEIGHT / 2);
+
     }
 
     /* Go ahead and load all of the images we know we're going to need to

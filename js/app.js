@@ -56,11 +56,6 @@ Player.prototype.update = function() {
     if (this.y < 0) {
         this.y = HEIGHT - GRIDHEIGHT / 2;
     }
-    for (var enemy in allEnemies) {
-        if (this.ifCollision(allEnemies[enemy]) === true) {
-            this.y = HEIGHT - GRIDHEIGHT / 2;
-        }
-    }
 };
 
 Player.prototype.handleInput = function(input) {
@@ -85,11 +80,8 @@ Player.prototype.ifCollision = function(object) {
     return ifTouch;
 };
 
-// a collection of enemies
-var allEnemies = [];
-
-// generate eight enemies randomly and add them into the collection
-while (allEnemies.length < 8) {
+function enemyGenerate() {
+    // helper function for randomly generating enemy
     var randomPick = Math.round(Math.random() * 2 + 1);
     if (randomPick === 1 || randomPick === 3) {
         var x = -GRIDWIDTH;
@@ -100,8 +92,11 @@ while (allEnemies.length < 8) {
     }
     var y = randomPick * GRIDHEIGHT - GRIDHEIGHT / 2;
     var speed = (100 * Math.random() + 150) * direction;
-    allEnemies.push(new Enemy(x, y, speed));
+    var enemy = new Enemy(x, y, speed);
+    return enemy;
 }
+// a collection enemies
+var allEnemies = [];
 
 // this is the player
 var player = new Player(WIDTH / 2 - GRIDWIDTH / 2, HEIGHT - GRIDHEIGHT / 2);
