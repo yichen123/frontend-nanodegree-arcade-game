@@ -9,6 +9,7 @@ var HEIGHT = GRIDHEIGHT * (NUMROWS - 1);
 var WIDTH = GRIDWIDTH * NUMCOLS;
 var ENEMYWIDTH = 80;
 var PLAYERWIDTH = 80;
+var NUMENEMIES = 8;
 
 var Entity = function(x, y) {
     // This is the Entity class that the

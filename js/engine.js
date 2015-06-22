@@ -192,7 +192,7 @@ var Engine = (function(global) {
         allEnemies = [];
 
         // generate eight enemies randomly and add them into the collection
-        while (allEnemies.length < 8) {
+        while (allEnemies.length < NUMENEMIES) {
             allEnemies.push(enemyGenerate());
         }
 
