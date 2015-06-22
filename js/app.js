@@ -23,7 +23,7 @@ var Enemy = function() {
     this.y = randomPick * GRIDHEIGHT - ENEMYHEIGHT / 2;
     this.speed = (100 * Math.random() + 150) * this.direction;
     console.log(this.x, this.y, this.speed);
-}
+};
 
 Enemy.prototype.update = function(dt) {
     // Update the enemy's position, required method for game
@@ -35,12 +35,12 @@ Enemy.prototype.update = function(dt) {
     } else {
         this.x = this.x + this.speed * dt;
     }
-}
+};
 
 Enemy.prototype.render = function() {
     // drawing function for the enemy
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 var Player = function() {
     // This is the player object
@@ -62,12 +62,12 @@ Player.prototype.update = function() {
             }
         }
     }
-}
+};
 
 Player.prototype.render = function() {
     //drawing function for the player
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 Player.prototype.handleInput = function(input) {
     // move player to the desired position when key pressed
@@ -81,18 +81,18 @@ Player.prototype.handleInput = function(input) {
         this.y += GRIDHEIGHT;
     }
 
-}
+};
 
 // a collection of enemies
 var allEnemies = [];
 
 // adding enemy to the collection
 while (allEnemies.length < 10) {
-    allEnemies.push(new Enemy);
+    allEnemies.push(new Enemy());
 }
 
 // this is the player
-var player = new Player;
+var player = new Player();
 
 // key listener that waits for triggering the keyHandler
 document.addEventListener('keyup', function(e) {
