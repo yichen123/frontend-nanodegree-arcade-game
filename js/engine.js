@@ -179,7 +179,7 @@ var Engine = (function(global) {
         }
         var y = randomPick * GRIDHEIGHT - GRIDHEIGHT / 2;
         var speed = (100 * Math.random() + 150) * direction;
-        var enemy = new Enemy(x, y, speed);
+        var enemy = new Enemy(x, y, ENEMYWIDTH, speed);
         return enemy;
     }
 
@@ -197,7 +197,7 @@ var Engine = (function(global) {
         }
 
         // reset the player's position
-        player = new Player(WIDTH / 2 - GRIDWIDTH / 2, HEIGHT - GRIDHEIGHT / 2);
+        player = new Player(WIDTH / 2 - GRIDWIDTH / 2, HEIGHT - GRIDHEIGHT / 2, PLAYERWIDTH);
 
     }
 

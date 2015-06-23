@@ -1,6 +1,6 @@
 'use strict';
 
-//constants
+// constants
 var GRIDHEIGHT = 83;
 var GRIDWIDTH = 101;
 var NUMROWS = 6;
@@ -10,12 +10,15 @@ var WIDTH = GRIDWIDTH * NUMCOLS;
 var ENEMYWIDTH = 80;
 var PLAYERWIDTH = 80;
 var NUMENEMIES = 8;
+// global variables
+var allEnemies = [];
+var player;
 
-var Entity = function(x, y) {
-    // This is the Entity class that the
-    // father of both enemy and player classes
+// This is the Entity class that the father of both enemy and player classes
+var Entity = function(x, y, width) {
     this.x = x;
     this.y = y;
+    this.width = width;
 };
 
 Entity.prototype.render = function() {
@@ -24,11 +27,10 @@ Entity.prototype.render = function() {
 };
 
 // This is the Enemy class
-var Enemy = function(x, y, speed) {
-    Entity.call(this, x, y);
+var Enemy = function(x, y, width, speed) {
+    Entity.call(this, x, y, width);
     this.sprite = 'images/enemy-bug.png';
     this.speed = speed;
-    this.width = ENEMYWIDTH;
 };
 Enemy.prototype = Object.create(Entity.prototype);
 
@@ -45,10 +47,9 @@ Enemy.prototype.update = function(dt) {
 };
 
 // This is the player class
-var Player = function(x, y) {
-    Entity.call(this, x, y);
+var Player = function(x, y, width) {
+    Entity.call(this, x, y, width);
     this.sprite = 'images/char-boy.png';
-    this.width = PLAYERWIDTH;
 };
 Player.prototype = Object.create(Entity.prototype);
 
@@ -61,6 +62,7 @@ Player.prototype.update = function() {
 
 Player.prototype.handleInput = function(input) {
     // move player to the desired position when key pressed
+    // make sure the player will not off the screen
     if (input === 'left' && this.x >= GRIDWIDTH) {
         this.x -= GRIDWIDTH;
     } else if (input === 'right' && this.x < WIDTH - GRIDWIDTH) {
@@ -81,14 +83,8 @@ Player.prototype.ifCollision = function(object) {
     return ifTouch;
 };
 
-// a collection enemies
-var allEnemies = [];
-
-// this is the player
-var player;
-
-// key listener that waits for triggering the keyHandler
 document.addEventListener('keyup', function(e) {
+    // key listener that waits for triggering the keyHandler
     var allowedKeys = {
         37: 'left',
         38: 'up',
