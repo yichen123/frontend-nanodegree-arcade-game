@@ -37,6 +37,7 @@ Enemy.prototype = Object.create(Entity.prototype);
 Enemy.prototype.update = function(dt) {
     // Update the enemy's position, required method for game
     // Make sure the enemy loop through the table
+    // parameter dt is a time interval
     if (this.x > WIDTH && this.speed > 0) {
         this.x = -GRIDWIDTH;
     } else if (this.x < -GRIDWIDTH && this.speed < 0) {

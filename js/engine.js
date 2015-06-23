@@ -85,7 +85,7 @@ var Engine = (function(global) {
     }
 
     /*
-    * if player touches enemy, the game reset
+    * if player touches enemy, reset the game
     */
     function checkCollisions() {
         for (var enemy in allEnemies) {
@@ -168,7 +168,10 @@ var Engine = (function(global) {
     }
 
     function enemyGenerate() {
-        // helper function for randomly generating enemy
+        // helper function for randomly generating enemies.
+        // randomPick determine the lane that enemy stays.
+        // direction == 1 means enemy moves towards right
+        // and direction == -1 means enemy moves towards left.
         var randomPick = Math.round(Math.random() * 2 + 1);
         if (randomPick === 1 || randomPick === 3) {
             var x = -GRIDWIDTH;
@@ -190,15 +193,12 @@ var Engine = (function(global) {
     function reset() {
         // clear enemy collection
         allEnemies = [];
-
         // generate eight enemies randomly and add them into the collection
         while (allEnemies.length < NUMENEMIES) {
             allEnemies.push(enemyGenerate());
         }
-
         // reset the player's position
         player = new Player(WIDTH / 2 - GRIDWIDTH / 2, HEIGHT - GRIDHEIGHT / 2, PLAYERWIDTH);
-
     }
 
     /* Go ahead and load all of the images we know we're going to need to
